@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Login</title>
+        <link rel="stylesheet" href="common.css">
+    </head>
+
+    <body>
+        <div id="nav">
+            <div><a href="index.html">Home</a></div>
+            <div><a href="Login.html">Login</a></div>
+            <div><a href="Signup.html">Sign up</a></div>
+        </div>
+        <div id="login-form-div">
+
+            <form>
+                <!--Write form input elements here-->
+                <input type="email" id="email" placeholder="Email id">
+                <input type="password" id="password" placeholder="Password">
+                <input type="submit">
+            </form>
+
+        </div>
+    </body>
+
+</html>
+
+<script>
+    // DOM variables
+    var form = document.querySelector("form") ;
+    form.addEventListener("submit",signupfunction)
+
+    var signupDetails = JSON.parse(localStorage.getItem("signupData"))
+    console.log(signupDetails)
+    // DOM functions
+    
+    function checkEmpty(email,password)
+    {
+        if(email.length == 0){
+            alert("email field is empty")
+            return false 
+        }
+        else if(password.length == 0){
+            alert("pass field is empty")
+            return false 
+        }
+        return true ;
+    }
+
+
+    function signupfunction(){
+        event.preventDefault() 
+        let email = form.email.value ;
+        let password = form.password.value ; 
+
+        var check = checkEmpty(email,password) ;
+        if(check == true) {
+            console.log("HI buddy")
+            var loginObj = {
+                email: email,
+                password: password
+            }
+            console.log(loginObj)
+
+            if(signupDetails.email === loginObj.email && signupDetails.password === loginObj.password) {
+                localStorage.setItem("userData",JSON.stringify(signupDetails))
+                alert("Login Sucessfull")
+                window.location.href = "index.html"
+            }
+            else{
+                alert("invalid Credentials")
+            }
+        }
+
+    }
+</script>

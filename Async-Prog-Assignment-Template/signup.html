@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Signup</title>
+        <link rel="stylesheet" href="common.css">
+
+    </head>
+
+    <body>
+        <div id="nav">
+            <div><a href="index.html">Home</a></div>
+            <div><a href="Login.html">Login</a></div>
+            <div><a href="Signup.html">Sign up</a></div>
+        </div>
+        <div id="signup-form-div">
+
+            <form>
+                <!--Write form input elements here-->
+                <input type="text" id="name" placeholder="Enter Name">
+                <input type="number" id="mNumber" placeholder="Contact Number">
+                <input type="email" id="email" placeholder="Email id">
+                <input type="password" id="password" placeholder="Password">
+                <input type="submit">
+            </form>
+
+        </div>
+    </body>
+
+</html>
+
+
+
+<script>
+    // DOM variables
+    var form = document.querySelector("form") ;
+    form.addEventListener("submit",signupfunction)
+
+    // DOM functions
+    
+    function checkEmpty(name,number,email,password)
+    {
+        if(name.length == 0){
+            alert("name field is empty")
+            return false 
+        }
+        else if(number.length == 0){
+            alert("number field is empty")
+            return false 
+        }
+        else if(email.length == 0){
+            alert("email field is empty")
+            return false 
+        }
+        else if(password.length == 0){
+            alert("pass field is empty")
+            return false 
+        }
+        return true ;
+    }
+
+
+    function signupfunction(){
+        event.preventDefault() 
+        let name = form.name.value ;
+        let number = form.mNumber.value ;
+        let email = form.email.value ;
+        let password = form.password.value ; 
+
+        var check = checkEmpty(name,number,email,password) ;
+        if(check == true) {
+            console.log("HI buddy")
+            var obj = {
+                name: name,
+                number : number ,
+                email: email,
+                password: password
+            }
+            localStorage.setItem("signupData",JSON.stringify(obj))
+            console.log(obj)
+            window.location.href = "Login.html"
+        }
+
+    }
+</script>
